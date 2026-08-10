@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 42 27% 94%;        /* #F5F3EE hangat */
+  --foreground: 20 25% 15%;        /* nyaris hitam, sedikit hangat */
+  --primary: 0 46% 32%;            /* #7A2B2B merah bata tua */
+  --primary-foreground: 42 27% 96%;
+  --accent: 42 78% 45%;            /* #D4A017 kuning emas */
+  --accent-foreground: 20 25% 15%;
+  --secondary: 178 55% 27%;        /* #1F6F6B teal tropis */
+  --secondary-foreground: 42 27% 96%;
+  --border: 30 15% 85%;
+  --radius: 0.5rem;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Signature element: efek "sudut terlipat" ala kertas di papan mading,
+   dipakai di kartu berita unggulan (lihat components/berita/berita-card.tsx) */
+.mading-fold {
+  position: relative;
+}
+.mading-fold::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, transparent 50%, hsl(var(--background)) 50%);
+  box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Styling Swiper (Hero Slider) supaya sesuai tema merah bata & kuning emas */
+.hero-swiper .swiper-pagination-bullet {
+  background: white;
+  opacity: 0.6;
+}
+.hero-swiper .swiper-pagination-bullet-active {
+  background: hsl(var(--accent));
+  opacity: 1;
+}
+.hero-swiper .swiper-button-next,
+.hero-swiper .swiper-button-prev {
+  color: white;
+  transform: scale(0.6);
+}
+
+/* Styling tabel di dalam konten berita (dari rich text editor) */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.prose table td,
+.prose table th {
+  border: 1px solid hsl(var(--border));
+  padding: 0.5rem 0.75rem;
+}
+.prose table th {
+  background: hsl(var(--accent) / 0.1);
+  font-weight: 600;
+}
+
+/* =====================================================================
+   TEMA WARNA UNTUK PANEL ADMIN (dipilih per akun via halaman Profil Saya)
+   Kartu/tabel yang pakai bg-white sengaja TETAP putih di semua tema
+   (supaya teks di dalamnya tetap kontras terbaca), yang berubah cuma
+   latar halaman & warna teks dasar.
+   ===================================================================== */
+
+[data-theme="kontras"] {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 0%;
+  --border: 0 0% 25%;
+}
+
+[data-theme="sepia"] {
+  --background: 39 46% 90%;
+  --foreground: 30 45% 15%;
+  --border: 35 30% 65%;
+}
+
+[data-theme="gelap_parsial"] {
+  --background: 220 18% 12%;
+  --foreground: 0 0% 92%;
+  --border: 220 12% 28%;
+}
