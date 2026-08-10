@@ -13,6 +13,7 @@ import { ImageUploader } from "@/components/admin/image-uploader";
 import { RichTextEditor } from "@/components/admin/rich-text-editor";
 import { extractStoragePath } from "@/lib/storage-helpers";
 import { getYoutubeId } from "@/lib/youtube-helpers";
+import { sanitizeBeritaHtml } from "@/lib/sanitize-html";
 import type { Kategori } from "@/types/database.types";
 
 interface BeritaFormProps {
@@ -81,7 +82,7 @@ export function BeritaForm({ mode, beritaId, initialData }: BeritaFormProps) {
         judul: judul.trim(),
         slug,
         ringkasan: ringkasan.trim() || null,
-        konten,
+        konten: sanitizeBeritaHtml(konten),
         thumbnail_url: thumbnailUrl,
         video_url: videoUrl.trim() || null,
         kategori_id: kategoriId || null,

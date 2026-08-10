@@ -7,6 +7,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { BeritaCard } from "@/components/berita/berita-card";
 import { getYoutubeEmbedUrl } from "@/lib/youtube-helpers";
+import { sanitizeBeritaHtml } from "@/lib/sanitize-html";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -146,7 +147,7 @@ export default async function DetailBeritaPage({ params }: Props) {
 
         <article
           className="prose prose-sm mt-6 max-w-none sm:prose-base prose-headings:font-display prose-a:text-primary"
-          dangerouslySetInnerHTML={{ __html: berita.konten }}
+          dangerouslySetInnerHTML={{ __html: sanitizeBeritaHtml(berita.konten) }}
         />
 
         {/* Share ke WhatsApp — sesuai kebiasaan orang tua Indonesia */}
