@@ -65,6 +65,7 @@ export function GuruStaffForm({ mode, itemId, initialData }: GuruStaffFormProps)
         const { error: insertError } = await supabase.from("guru_staff").insert({ ...payload, penulis_id: user.id });
         if (insertError) throw insertError;
       } else {
+        if (!itemId) throw new Error("ID data tidak ditemukan.");
         const { error: updateError } = await supabase.from("guru_staff").update(payload).eq("id", itemId);
         if (updateError) throw updateError;
       }

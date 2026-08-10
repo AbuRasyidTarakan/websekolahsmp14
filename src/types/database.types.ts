@@ -8,7 +8,7 @@ export type KategoriAgenda = "Akademik" | "Libur" | "Ujian" | "Ekstrakurikuler" 
 
 export type TemaPreferensi = "terang" | "kontras" | "sepia" | "gelap_parsial";
 
-export interface Profile {
+export type Profile = {
   id: string;
   email: string | null;
   nama_lengkap: string;
@@ -21,7 +21,7 @@ export interface Profile {
   updated_at: string;
 }
 
-export interface Kategori {
+export type Kategori = {
   id: string;
   nama: string;
   slug: string;
@@ -30,7 +30,7 @@ export interface Kategori {
   created_at: string;
 }
 
-export interface Berita {
+export type Berita = {
   id: string;
   judul: string;
   slug: string;
@@ -51,7 +51,7 @@ export interface Berita {
   penulis?: Profile;
 }
 
-export interface GaleriAlbum {
+export type GaleriAlbum = {
   id: string;
   judul_album: string;
   berita_id: string | null;
@@ -61,7 +61,7 @@ export interface GaleriAlbum {
   foto?: GaleriFoto[];
 }
 
-export interface GaleriFoto {
+export type GaleriFoto = {
   id: string;
   album_id: string;
   url_foto: string;
@@ -69,7 +69,7 @@ export interface GaleriFoto {
   urutan: number;
 }
 
-export interface Agenda {
+export type Agenda = {
   id: string;
   judul_kegiatan: string;
   deskripsi: string | null;
@@ -80,7 +80,7 @@ export interface Agenda {
   created_at: string;
 }
 
-export interface ProfilSekolah {
+export type ProfilSekolah = {
   id: 1;
   nama_sekolah: string | null;
   npsn: string | null;
@@ -102,7 +102,7 @@ export interface ProfilSekolah {
 
 export type KategoriDokumen = "Kalender Akademik" | "Formulir" | "Tata Tertib" | "Surat Edaran" | "Lainnya";
 
-export interface Dokumen {
+export type Dokumen = {
   id: string;
   judul: string;
   deskripsi: string | null;
@@ -114,7 +114,7 @@ export interface Dokumen {
   created_at: string;
 }
 
-export interface Faq {
+export type Faq = {
   id: string;
   pertanyaan: string;
   jawaban: string;
@@ -124,7 +124,7 @@ export interface Faq {
   updated_at: string;
 }
 
-export interface VideoKegiatan {
+export type VideoKegiatan = {
   id: string;
   judul: string;
   deskripsi: string | null;
@@ -133,7 +133,7 @@ export interface VideoKegiatan {
   created_at: string;
 }
 
-export interface GuruStaff {
+export type GuruStaff = {
   id: string;
   nama_lengkap: string;
   nip: string | null;
@@ -147,7 +147,7 @@ export interface GuruStaff {
   updated_at: string;
 }
 
-export interface PengumumanBanner {
+export type PengumumanBanner = {
   id: string;
   pesan: string;
   is_active: boolean;
@@ -155,19 +155,50 @@ export interface PengumumanBanner {
   created_at: string;
 }
 
+export type AksiLog = "insert" | "update" | "delete";
+
+export type LogAktivitas = {
+  id: string;
+  aksi: AksiLog;
+  entitas: string;
+  judul: string | null;
+  pelaku_id: string | null;
+  created_at: string;
+}
+
+export type Kunjungan = {
+  id: string;
+  visitor_id: string;
+  halaman: string;
+  tanggal_wita: string;
+  created_at: string;
+}
+
 // Tipe generik "Database" dipakai oleh @supabase/ssr client (bisa disederhanakan
 // dulu seperti ini; bisa diganti hasil generate otomatis Supabase CLI nanti)
-export interface Database {
+export type Database = {
   public: {
     Tables: {
-      profiles: { Row: Profile; Insert: Partial<Profile>; Update: Partial<Profile> };
-      kategori: { Row: Kategori; Insert: Partial<Kategori>; Update: Partial<Kategori> };
-      berita: { Row: Berita; Insert: Partial<Berita>; Update: Partial<Berita> };
-      galeri_album: { Row: GaleriAlbum; Insert: Partial<GaleriAlbum>; Update: Partial<GaleriAlbum> };
-      galeri_foto: { Row: GaleriFoto; Insert: Partial<GaleriFoto>; Update: Partial<GaleriFoto> };
-      agenda: { Row: Agenda; Insert: Partial<Agenda>; Update: Partial<Agenda> };
-      profil_sekolah: { Row: ProfilSekolah; Insert: Partial<ProfilSekolah>; Update: Partial<ProfilSekolah> };
-      pengumuman_banner: { Row: PengumumanBanner; Insert: Partial<PengumumanBanner>; Update: Partial<PengumumanBanner> };
+      profiles: { Row: Profile; Insert: Partial<Profile>; Update: Partial<Profile>; Relationships: [] };
+      kategori: { Row: Kategori; Insert: Partial<Kategori>; Update: Partial<Kategori>; Relationships: [] };
+      berita: { Row: Berita; Insert: Partial<Berita>; Update: Partial<Berita>; Relationships: [] };
+      galeri_album: { Row: GaleriAlbum; Insert: Partial<GaleriAlbum>; Update: Partial<GaleriAlbum>; Relationships: [] };
+      galeri_foto: { Row: GaleriFoto; Insert: Partial<GaleriFoto>; Update: Partial<GaleriFoto>; Relationships: [] };
+      agenda: { Row: Agenda; Insert: Partial<Agenda>; Update: Partial<Agenda>; Relationships: [] };
+      profil_sekolah: { Row: ProfilSekolah; Insert: Partial<ProfilSekolah>; Update: Partial<ProfilSekolah>; Relationships: [] };
+      pengumuman_banner: { Row: PengumumanBanner; Insert: Partial<PengumumanBanner>; Update: Partial<PengumumanBanner>; Relationships: [] };
+      dokumen: { Row: Dokumen; Insert: Partial<Dokumen>; Update: Partial<Dokumen>; Relationships: [] };
+      faq: { Row: Faq; Insert: Partial<Faq>; Update: Partial<Faq>; Relationships: [] };
+      video_kegiatan: { Row: VideoKegiatan; Insert: Partial<VideoKegiatan>; Update: Partial<VideoKegiatan>; Relationships: [] };
+      guru_staff: { Row: GuruStaff; Insert: Partial<GuruStaff>; Update: Partial<GuruStaff>; Relationships: [] };
+      log_aktivitas: { Row: LogAktivitas; Insert: Partial<LogAktivitas>; Update: Partial<LogAktivitas>; Relationships: [] };
+      kunjungan: { Row: Kunjungan; Insert: Partial<Kunjungan>; Update: Partial<Kunjungan>; Relationships: [] };
     };
+    Views: {};
+    Functions: {
+      increment_berita_views: { Args: { berita_id: string }; Returns: undefined };
+    };
+    Enums: {};
+    CompositeTypes: {};
   };
 }

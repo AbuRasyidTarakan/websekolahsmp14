@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select } from "@/components/ui/select";
+import type { KategoriDokumen } from "@/types/database.types";
 
 const KATEGORI_OPSI = ["Kalender Akademik", "Formulir", "Tata Tertib", "Surat Edaran", "Lainnya"];
 
@@ -46,7 +47,7 @@ export function DokumenForm() {
       const { error: insertError } = await supabase.from("dokumen").insert({
         judul: judul.trim(),
         deskripsi: deskripsi.trim() || null,
-        kategori,
+        kategori: kategori as KategoriDokumen,
         file_url: publicUrl.publicUrl,
         file_name: file.name,
         file_size: file.size,

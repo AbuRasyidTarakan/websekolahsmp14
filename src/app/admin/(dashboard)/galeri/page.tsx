@@ -44,8 +44,8 @@ export default async function KelolaGaleriPage() {
       ) : (
         <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {albumList?.map((album) => {
-            // @ts-expect-error - relasi array di runtime
-            const fotoList = (album.galeri_foto ?? []) as { url_foto: string }[];
+ 
+            const fotoList = (album.galeri_foto ?? []) as unknown as { url_foto: string }[];
             const urlFotoList = fotoList.map((f) => f.url_foto);
             if (album.cover_url) urlFotoList.push(album.cover_url);
 

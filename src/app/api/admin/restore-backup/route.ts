@@ -18,7 +18,7 @@ const URUTAN_TABEL = [
   "berita",
   "galeri_foto",
   "log_aktivitas",
-];
+] as const;
 
 interface HasilTabel {
   tabel: string;

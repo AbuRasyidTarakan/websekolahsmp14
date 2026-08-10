@@ -97,6 +97,7 @@ export function BeritaForm({ mode, beritaId, initialData }: BeritaFormProps) {
         });
         if (insertError) throw insertError;
       } else {
+        if (!beritaId) throw new Error("ID berita tidak ditemukan.");
         const updatePayload: typeof payload & { published_at?: string } = { ...payload };
         // Kalau sebelumnya draft lalu sekarang dipublikasikan, catat tanggal publish sekarang
         if (initialData?.status === "draft" && statusTujuan === "published") {

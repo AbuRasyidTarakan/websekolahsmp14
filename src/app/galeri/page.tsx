@@ -42,7 +42,7 @@ export default async function GaleriPage() {
                     {album.judul_album}
                   </p>
                   <p className="mt-1 text-xs text-foreground/50">
-                    {/* @ts-expect-error - relasi count */}
+                    
                     {album.galeri_foto?.length ?? 0} foto
                   </p>
                 </div>

@@ -43,6 +43,7 @@ export function FaqForm({ mode, faqId, initialData }: FaqFormProps) {
           .insert({ pertanyaan: pertanyaan.trim(), jawaban: jawaban.trim(), urutan, penulis_id: user.id });
         if (insertError) throw insertError;
       } else {
+        if (!faqId) throw new Error("ID FAQ tidak ditemukan.");
         const { error: updateError } = await supabase
           .from("faq")
           .update({ pertanyaan: pertanyaan.trim(), jawaban: jawaban.trim(), urutan })

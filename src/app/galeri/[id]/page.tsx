@@ -21,8 +21,10 @@ export default async function DetailAlbumPage({ params }: Props) {
 
   if (!album) notFound();
 
-  // @ts-expect-error - relasi array di runtime
-  const foto = (album.galeri_foto ?? []).sort((a, b) => a.urutan - b.urutan);
+ 
+  const foto = (
+    (album.galeri_foto ?? []) as unknown as { id: string; url_foto: string; caption: string | null; urutan: number }[]
+  ).sort((a, b) => a.urutan - b.urutan);
 
   return (
     <>

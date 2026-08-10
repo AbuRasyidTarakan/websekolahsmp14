@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select } from "@/components/ui/select";
+import type { KategoriAgenda } from "@/types/database.types";
 
 const KATEGORI_OPSI = ["Akademik", "Libur", "Ujian", "Ekstrakurikuler", "Lainnya"];
 
@@ -40,7 +41,7 @@ export default function TambahAgendaPage() {
         deskripsi: deskripsi.trim() || null,
         tanggal_mulai: tanggalMulai,
         tanggal_selesai: tanggalSelesai || null,
-        kategori,
+        kategori: kategori as KategoriAgenda,
         penulis_id: user.id,
       });
 
