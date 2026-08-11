@@ -27,13 +27,13 @@
     "@tiptap/starter-kit": "^2.5.9",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "isomorphic-dompurify": "^3.22.0",
     "lucide-react": "^0.400.0",
     "next": "14.2.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "swiper": "^11.1.9",
-    "tailwind-merge": "^2.5.2"
+    "tailwind-merge": "^2.5.2",
+    "xss": "^1.0.15"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
