@@ -4,6 +4,9 @@ import { SearchToggle } from "@/components/layout/search-toggle";
 import { VisitorTracker } from "@/components/layout/visitor-tracker";
 import { NavDropdown } from "@/components/layout/nav-dropdown";
 import { MobileMenu } from "@/components/layout/mobile-menu";
+import { SekolahAppDropdown } from "@/components/layout/sekolah-app-dropdown";
+import { getSekolahApps } from "@/lib/sekolah-app";
+import { domainDari, urlAman } from "@/lib/sekolah-app-url";
 
 const menuInti = [
   { label: "Beranda", href: "/" },
@@ -20,7 +23,15 @@ const menuLainnya = [
   { label: "Profil Sekolah", href: "/profil-sekolah" },
 ];
 
-export function Navbar() {
+export async function Navbar() {
+  const apps = await getSekolahApps();
+  const itemApp = apps.map((a) => ({
+    id: a.id,
+    nama: a.nama,
+    href: urlAman(a.url) ?? "#",
+    domain: domainDari(a.url),
+  }));
+
   return (
     <div className="sticky top-0 z-40">
       <VisitorTracker />
@@ -47,12 +58,22 @@ export function Navbar() {
                 {m.label}
               </Link>
             ))}
+            {itemApp.length > 0 ? (
+              <SekolahAppDropdown items={itemApp} />
+            ) : (
+              <Link
+                href="/sekolah-app"
+                className="rounded-md px-3 py-2 text-sm font-medium text-white/85 hover:bg-white/10 hover:text-white"
+              >
+                Sekolah App
+              </Link>
+            )}
             <NavDropdown items={menuLainnya} />
           </nav>
 
           <div className="flex items-center gap-1">
             <SearchToggle />
-            <MobileMenu items={[...menuInti, ...menuLainnya]} />
+            <MobileMenu items={[...menuInti, { label: "Sekolah App", href: "/sekolah-app" }, ...menuLainnya]} />
           </div>
         </div>
       </header>

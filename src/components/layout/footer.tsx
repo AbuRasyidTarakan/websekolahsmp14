@@ -1,9 +1,12 @@
 import { createClient } from "@/lib/supabase/server";
 import { Instagram, Facebook, Play } from "lucide-react";
+import { getSekolahApps } from "@/lib/sekolah-app";
+import { urlAman } from "@/lib/sekolah-app-url";
 
 export async function Footer() {
   const supabase = await createClient();
   const { data: profil } = await supabase.from("profil_sekolah").select("*").eq("id", 1).single();
+  const apps = (await getSekolahApps()).slice(0, 6);
 
   const mediaSosial = [
     profil?.instagram_url && {
@@ -28,7 +31,7 @@ export async function Footer() {
 
   return (
     <footer className="mt-16 border-t border-[#0f2544] bg-[#1B3A6B] text-white">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
         <div>
           <p className="font-display text-lg font-bold">{profil?.nama_sekolah ?? "SMP Negeri 14 Tarakan"}</p>
           <p className="mt-2 text-sm text-white/70">
@@ -44,6 +47,26 @@ export async function Footer() {
             <li><a href="/agenda" className="hover:text-white">Agenda</a></li>
             <li><a href="/profil-sekolah" className="hover:text-white">Profil Sekolah</a></li>
           </ul>
+        </div>
+
+        <div>
+          <p className="text-sm font-semibold">Sekolah App</p>
+          {apps.length > 0 ? (
+            <ul className="mt-2 space-y-1 text-sm text-white/70">
+              {apps.map((a) => (
+                <li key={a.id}>
+                  <a href={urlAman(a.url) ?? "#"} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+                    {a.nama}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a href="/sekolah-app" className="text-white/90 underline hover:text-white">Lihat semua →</a>
+              </li>
+            </ul>
+          ) : (
+            <p className="mt-2 text-sm italic text-white/40">Belum diisi</p>
+          )}
         </div>
 
         <div>

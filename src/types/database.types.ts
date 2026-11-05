@@ -166,6 +166,17 @@ export type LogAktivitas = {
   created_at: string;
 }
 
+export type SekolahApp = {
+  id: string;
+  nama: string;
+  url: string;
+  deskripsi: string | null;
+  urutan: number;
+  is_active: boolean;
+  dibuat_oleh: string | null;
+  created_at: string;
+}
+
 export type Kunjungan = {
   id: string;
   visitor_id: string;
@@ -192,6 +203,7 @@ export type Database = {
       video_kegiatan: { Row: VideoKegiatan; Insert: Partial<VideoKegiatan>; Update: Partial<VideoKegiatan>; Relationships: [] };
       guru_staff: { Row: GuruStaff; Insert: Partial<GuruStaff>; Update: Partial<GuruStaff>; Relationships: [] };
       log_aktivitas: { Row: LogAktivitas; Insert: Partial<LogAktivitas>; Update: Partial<LogAktivitas>; Relationships: [] };
+      sekolah_app: { Row: SekolahApp; Insert: Partial<SekolahApp>; Update: Partial<SekolahApp>; Relationships: [] };
       kunjungan: { Row: Kunjungan; Insert: Partial<Kunjungan>; Update: Partial<Kunjungan>; Relationships: [] };
     };
     Views: {};

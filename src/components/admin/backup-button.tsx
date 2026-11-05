@@ -20,6 +20,7 @@ const DAFTAR_TABEL = [
   "faq",
   "guru_staff",
   "video_kegiatan",
+  "sekolah_app",
   "log_aktivitas",
 ] as const;
 

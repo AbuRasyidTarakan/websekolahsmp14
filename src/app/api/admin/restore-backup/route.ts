@@ -14,6 +14,7 @@ const URUTAN_TABEL = [
   "dokumen",
   "pengumuman_banner",
   "video_kegiatan",
+  "sekolah_app",
   "galeri_album",
   "berita",
   "galeri_foto",
