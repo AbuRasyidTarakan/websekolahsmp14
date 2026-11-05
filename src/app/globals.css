@@ -13,6 +13,16 @@
   --secondary-foreground: 42 27% 96%;
   --border: 30 15% 85%;
   --radius: 0.5rem;
+
+  /* Rangka panel admin (sidebar + topbar) */
+  --chrome-bg: 0 0% 100%;
+  --chrome-strong: 222 47% 11%;
+  --chrome-fg: 215 19% 35%;
+  --chrome-muted: 215 20% 65%;
+  --chrome-border: 214 32% 91%;
+  --chrome-hover: 210 40% 96%;
+  --chrome-active-bg: 0 46% 32% / 0.1;
+  --chrome-active-fg: 0 46% 32%;
 }
 
 body {
@@ -77,16 +87,64 @@ body {
   --background: 0 0% 100%;
   --foreground: 0 0% 0%;
   --border: 0 0% 25%;
+  --chrome-bg: 0 0% 100%;
+  --chrome-strong: 0 0% 0%;
+  --chrome-fg: 0 0% 15%;
+  --chrome-muted: 0 0% 35%;
+  --chrome-border: 0 0% 25%;
+  --chrome-hover: 0 0% 93%;
+  --chrome-active-bg: 0 46% 32% / 0.12;
+  --chrome-active-fg: 0 46% 26%;
 }
 
 [data-theme="sepia"] {
   --background: 39 46% 90%;
   --foreground: 30 45% 15%;
   --border: 35 30% 65%;
+  --chrome-bg: 40 50% 96%;
+  --chrome-strong: 30 45% 12%;
+  --chrome-fg: 30 30% 26%;
+  --chrome-muted: 30 20% 45%;
+  --chrome-border: 35 30% 78%;
+  --chrome-hover: 39 40% 90%;
+  --chrome-active-bg: 0 46% 32% / 0.12;
+  --chrome-active-fg: 0 46% 30%;
 }
 
 [data-theme="gelap_parsial"] {
   --background: 220 18% 12%;
   --foreground: 0 0% 92%;
   --border: 220 12% 28%;
+  --chrome-bg: 220 18% 16%;
+  --chrome-strong: 0 0% 96%;
+  --chrome-fg: 220 14% 80%;
+  --chrome-muted: 220 10% 58%;
+  --chrome-border: 220 12% 26%;
+  --chrome-hover: 220 15% 22%;
+  --chrome-active-bg: 0 60% 60% / 0.18;
+  --chrome-active-fg: 0 80% 82%;
+}
+
+/* Scrollbar panel admin: transparan saat diam, tipis & samar saat kursor di atasnya
+   (sama seperti tampilan CMS Informatika). Tetap bisa di-scroll seperti biasa. */
+.scroll-samar {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+.scroll-samar:hover {
+  scrollbar-color: rgb(148 163 184 / 0.5) transparent;
+}
+.scroll-samar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.scroll-samar::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 9999px;
+}
+.scroll-samar:hover::-webkit-scrollbar-thumb {
+  background: rgb(148 163 184 / 0.5);
+}
+.scroll-samar::-webkit-scrollbar-track {
+  background: transparent;
 }

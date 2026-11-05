@@ -9,6 +9,38 @@ function tanggalWita(offsetHari = 0): string {
   return d.toLocaleDateString("en-CA", { timeZone: "Asia/Makassar" });
 }
 
+function StatCard({
+  icon,
+  label,
+  value,
+  note,
+  link,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: number | string;
+  note?: string;
+  link?: { href: string; label: string };
+}) {
+  return (
+    <div className="rounded-xl border border-slate-200 bg-white p-5 text-slate-800 shadow-sm">
+      <div className="flex items-center gap-3">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+          {icon}
+        </div>
+        <p className="text-sm text-slate-500">{label}</p>
+      </div>
+      <p className="mt-3 font-display text-3xl font-bold">{value}</p>
+      {note && <p className="mt-1 text-xs text-slate-400">{note}</p>}
+      {link && (
+        <Link href={link.href} className="mt-1 inline-block text-xs text-primary hover:underline">
+          {link.label}
+        </Link>
+      )}
+    </div>
+  );
+}
+
 export default async function AdminDashboardPage() {
   const supabase = await createClient();
 
@@ -64,48 +96,31 @@ export default async function AdminDashboardPage() {
       </p>
 
       <div className={`mt-6 grid grid-cols-2 gap-4 ${isSuperAdmin ? "lg:grid-cols-4" : "sm:grid-cols-3"}`}>
-        <div className="rounded-lg border border-border bg-white p-5">
-          <div className="flex items-center gap-2 text-foreground/50">
-            <FileText className="h-4 w-4" />
-            <p className="text-sm">{isSuperAdmin ? "Total Berita" : "Berita Saya"}</p>
-          </div>
-          <p className="mt-2 font-display text-3xl font-bold text-primary">{totalBerita}</p>
-          <p className="mt-1 text-xs text-foreground/40">{totalPublished} terbit · {totalDraft} draft</p>
-        </div>
-
-        <div className="rounded-lg border border-border bg-white p-5">
-          <div className="flex items-center gap-2 text-foreground/50">
-            <Eye className="h-4 w-4" />
-            <p className="text-sm">Total Views</p>
-          </div>
-          <p className="mt-2 font-display text-3xl font-bold">{totalViews.toLocaleString("id-ID")}</p>
-        </div>
-
+        <StatCard
+          icon={<FileText className="h-5 w-5" />}
+          label={isSuperAdmin ? "Total Berita" : "Berita Saya"}
+          value={totalBerita}
+          note={`${totalPublished} terbit · ${totalDraft} draft`}
+        />
+        <StatCard
+          icon={<Eye className="h-5 w-5" />}
+          label="Total Views"
+          value={totalViews.toLocaleString("id-ID")}
+        />
         {isSuperAdmin && (
           <>
-            <div className="rounded-lg border border-border bg-white p-5">
-              <div className="flex items-center gap-2 text-foreground/50">
-                <Users className="h-4 w-4" />
-                <p className="text-sm">Pengunjung Hari Ini</p>
-              </div>
-              <p className="mt-2 font-display text-3xl font-bold">{pengunjungHariIni}</p>
-              <Link href="/admin/statistik" className="mt-1 inline-block text-xs text-primary hover:underline">
-                Lihat detail →
-              </Link>
-            </div>
-
-            <div className="rounded-lg border border-border bg-white p-5">
-              <div className="flex items-center gap-2 text-foreground/50">
-                <ImageIcon className="h-4 w-4" />
-                <p className="text-sm">Album Galeri</p>
-              </div>
-              <p className="mt-2 font-display text-3xl font-bold">{totalAlbum}</p>
-            </div>
+            <StatCard
+              icon={<Users className="h-5 w-5" />}
+              label="Pengunjung Hari Ini"
+              value={pengunjungHariIni ?? 0}
+              link={{ href: "/admin/statistik", label: "Lihat detail →" }}
+            />
+            <StatCard icon={<ImageIcon className="h-5 w-5" />} label="Album Galeri" value={totalAlbum} />
           </>
         )}
       </div>
 
-      <div className="mt-8 rounded-lg border border-border bg-white p-5">
+      <div className="mt-8 rounded-xl border border-slate-200 bg-white p-5 shadow-sm text-slate-800">
         <div className="flex items-center justify-between">
           <p className="font-display font-bold">{isSuperAdmin ? "Berita Terbaru" : "Berita Saya Terbaru"}</p>
           <Link href="/admin/berita" className="text-sm text-primary hover:underline">Lihat semua →</Link>
@@ -133,7 +148,7 @@ export default async function AdminDashboardPage() {
       </div>
 
       {isSuperAdmin && (
-        <div className="mt-6 rounded-lg border border-border bg-white p-5">
+        <div className="mt-6 rounded-xl border border-slate-200 bg-white p-5 shadow-sm text-slate-800">
           <div className="flex items-center justify-between">
             <p className="flex items-center gap-2 font-display font-bold">
               <TrendingUp className="h-4 w-4" /> Aktivitas Terbaru

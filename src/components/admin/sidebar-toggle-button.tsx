@@ -1,7 +1,7 @@
 "use client";
 
 import { useSidebar } from "@/components/admin/sidebar-context";
-import { PanelLeftClose, PanelLeft } from "lucide-react";
+import { AlignJustify } from "lucide-react";
 
 export function SidebarToggleButton() {
   const { terbuka, toggle } = useSidebar();
@@ -11,9 +11,9 @@ export function SidebarToggleButton() {
       onClick={toggle}
       aria-label={terbuka ? "Sembunyikan menu" : "Tampilkan menu"}
       title={terbuka ? "Sembunyikan menu" : "Tampilkan menu"}
-      className="flex h-9 w-9 items-center justify-center rounded-md hover:bg-accent/10"
+      className="shrink-0 rounded-lg p-2 text-chrome-muted transition-colors hover:bg-chrome-hover hover:text-chrome-strong"
     >
-      {terbuka ? <PanelLeftClose className="h-5 w-5" /> : <PanelLeft className="h-5 w-5" />}
+      <AlignJustify className="h-5 w-5" />
     </button>
   );
 }
